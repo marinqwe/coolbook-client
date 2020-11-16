@@ -9,20 +9,19 @@ export const Home = ({ history }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    const fetchPosts = async () => {
-      try {
-        const { data } = await postApi.getAll();
-
-        setPosts(data);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-      }
-    };
-
     fetchPosts();
   }, [postApi]);
+
+  const fetchPosts = async () => {
+    try {
+      setLoading(true);
+      const { data } = await postApi.getAll();
+      setPosts(data);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
+  };
 
   if (loading) {
     return <Title>Loading posts...</Title>;
@@ -32,7 +31,7 @@ export const Home = ({ history }) => {
     <div>
       <h2>Coolbook</h2>
       {posts.length ? (
-        <Posts posts={posts} history={history} />
+        <Posts posts={posts} fetchPosts={fetchPosts} history={history} />
       ) : (
         <p>There are no posts yet.</p>
       )}

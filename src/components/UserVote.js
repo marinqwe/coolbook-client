@@ -2,9 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { UpArrow, DownArrow, ArrowGroup } from "../styles";
 import { UserContext } from "../context/user-context";
 
-function UserVote({ postId, likes }) {
-  const { likesApi, user } = useContext(UserContext);
-  const [loading, setLoading] = useState(false);
+function UserVote({ postId, likes, onUserVote }) {
+  const { user } = useContext(UserContext);
   const [postLiked, setPostLiked] = useState(false);
   const [postDisliked, setPostDisliked] = useState(false);
 
@@ -22,30 +21,17 @@ function UserVote({ postId, likes }) {
     0
   );
 
-  const onUserVote = async (voteValue) => {
-    try {
-      setLoading(true);
-      const { data } = await likesApi.userVote({
-        userVote: voteValue,
-        userId: user.id,
-        postId,
-      });
-      console.log(data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
-  };
-
   return (
     <>
       <ArrowGroup>
-        <UpArrow liked={postLiked} onClick={() => onUserVote(true)}>
+        <UpArrow liked={postLiked} onClick={() => onUserVote(true, postId)}>
           ▲
         </UpArrow>{" "}
-        {loading ? "..." : voteCount}
-        <DownArrow disliked={postDisliked} onClick={() => onUserVote(false)}>
+        {voteCount}
+        <DownArrow
+          disliked={postDisliked}
+          onClick={() => onUserVote(false, postId)}
+        >
           ▼
         </DownArrow>
       </ArrowGroup>

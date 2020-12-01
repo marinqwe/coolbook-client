@@ -7,13 +7,23 @@ import {
 } from "./StyledForm";
 import { StyledLink } from "./StyledLink";
 import { StyledNavBar, StyledNavLink, StyledUser } from "./StyledNav";
-import { BlueButton, CancelButton, ButtonGroup } from "./StyledButton";
+import {
+  BlueButton,
+  DarkButton,
+  ButtonGroup,
+  OrangeButton,
+} from "./StyledButton";
 import { Title } from "./StyledText";
 import { StyledError } from "./StyledError";
 import { StyledImage, StyledIcon } from "./StyledImage";
 import { Loader, LoaderWrapper } from "./Loader";
 import { UpArrow, DownArrow, ArrowGroup } from "./StyledArrows";
-import { StyledPostContent, StyledPostTitle, StyledPostPreview } from "./StyledPosts";
+import {
+  StyledPostContent,
+  StyledPostTitle,
+  StyledPostPreview,
+  StyledConfirmDelete,
+} from "./StyledPosts";
 
 export {
   StyledForm,
@@ -26,8 +36,9 @@ export {
   StyledLink,
   StyledError,
   BlueButton,
-  CancelButton,
+  DarkButton,
   ButtonGroup,
+  OrangeButton,
   Title,
   StyledApp,
   StyledImage,
@@ -35,9 +46,10 @@ export {
   StyledPostContent,
   StyledPostTitle,
   StyledPostPreview,
+  StyledConfirmDelete,
   Loader,
   LoaderWrapper,
   UpArrow,
   DownArrow,
-  ArrowGroup
+  ArrowGroup,
 };

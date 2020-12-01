@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const BlueButton = styled.button`
   width: 15%;
-  padding: 5px 10px;
+  padding: 5px 5px;
   margin: 10px;
   cursor: pointer;
   color: white;
@@ -11,27 +11,21 @@ export const BlueButton = styled.button`
   border-radius: 3px;
   appearance: none;
   font-size: calc(8px + 2vmin);
-  min-width: 90px;
+  min-width: 100px;
   &[disabled] {
     opacity: 0.5;
   }
 `;
 
-export const CancelButton = styled.p`
-  width: 15%;
-  padding: 5px 10px;
-  margin: 10px;
-  cursor: pointer;
-  color: white;
+export const DarkButton = styled(BlueButton)`
   background-color: ${(props) => props.theme.black};
-  border-radius: 3px;
-  text-align: center;
-  font-size: calc(8px + 2vmin);
-  min-width: 90px;
+`;
+
+export const OrangeButton = styled(BlueButton)`
+  background-color: ${(props) => props.theme.orange};
 `;
 
 export const ButtonGroup = styled.div`
-  width: 80%;
   display: flex;
   justify-content: flex-start;
 `;

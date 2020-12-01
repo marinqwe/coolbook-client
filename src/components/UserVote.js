@@ -8,13 +8,15 @@ function UserVote({ postId, likes, onUserVote }) {
   const [postDisliked, setPostDisliked] = useState(false);
 
   useEffect(() => {
-    const userVote = likes.filter(({ userId }) => userId === user.id);
-    if (userVote[0]) {
-      userVote[0].voteValue === true
-        ? setPostLiked(true)
-        : setPostDisliked(true);
+    if (user) {
+      const userVote = likes.filter(({ userId }) => userId === user.id);
+      if (userVote[0]) {
+        userVote[0].voteValue === true
+          ? setPostLiked(true)
+          : setPostDisliked(true);
+      }
     }
-  }, []);
+  }, [likes, user]);
 
   const voteCount = likes.reduce(
     (sum, { voteValue }) => (voteValue === true ? sum + 1 : sum - 1),

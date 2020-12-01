@@ -3,9 +3,7 @@ import {
   StyledInput,
   StyledForm,
   BlueButton,
-  StyledError,
   Title,
-  CancelButton,
 } from "../styles";
 import { UserContext } from "../context/user-context";
 
@@ -13,7 +11,7 @@ function Login({ history }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  //const [error, setError] = useState(null);
   const { setUser, userApi } = useContext(UserContext);
 
   const handleSubmit = async (e) => {

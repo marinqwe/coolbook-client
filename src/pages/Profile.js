@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { CancelButton } from "../styles";
+import { DarkButton } from "../styles";
 import { UserContext } from "../context/user-context";
 import { StyledImage } from '../styles';
 
@@ -12,7 +12,7 @@ function Profile({ history }) {
     <div>
       <StyledImage src={user.userImg} alt="profilePic" />
       <h2>{user.name}</h2>
-      <CancelButton
+      <DarkButton
         onClick={async () => {
           await userApi.logout();
           setUser(null);
@@ -20,7 +20,7 @@ function Profile({ history }) {
         }}
       >
         Log out
-      </CancelButton>
+      </DarkButton>
     </div>
   );
 }

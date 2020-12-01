@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/user-context";
 import Posts from "../components/Posts";
 import { Title } from "../styles";
@@ -8,11 +8,7 @@ export const Home = ({ history }) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    fetchPosts();
-  }, [postApi]);
-
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
     try {
       setLoading(true);
       const { data } = await postApi.getAll();
@@ -21,7 +17,11 @@ export const Home = ({ history }) => {
     } catch (error) {
       setLoading(false);
     }
-  };
+  }, [postApi]);
+
+  useEffect(() => {
+    fetchPosts();
+  }, [fetchPosts]);
 
   if (loading) {
     return <Title>Loading posts...</Title>;

@@ -16,7 +16,7 @@ function Posts({ posts, history, fetchPosts }) {
         userId: user.id,
         postId,
       });
-      fetchPosts();
+      await fetchPosts();
     } catch (error) {
       console.log(error);
     }

@@ -6,6 +6,7 @@ import { UserContext } from "../context/user-context";
 const theme = {
   red: "#FF0000",
   black: "#393939",
+  orange: "#d1c143",
   lightgrey: "#E1E1E1",
   offWhite: "#EDEDED",
   green: "#009933",

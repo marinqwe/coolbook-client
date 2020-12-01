@@ -26,3 +26,10 @@ export const StyledPostPreview = styled.div`
   width: 90%;
   max-width: 700px;
 `;
+
+export const StyledConfirmDelete = styled.span`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;

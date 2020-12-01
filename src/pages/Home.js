@@ -33,7 +33,7 @@ export const Home = ({ history }) => {
       {posts.length ? (
         <Posts posts={posts} fetchPosts={fetchPosts} history={history} />
       ) : (
-        <p>There are no posts yet.</p>
+        <p>It's empty in here. Click "Create Post" to fill the void!</p>
       )}
     </div>
   );

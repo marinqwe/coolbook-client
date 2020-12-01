@@ -5,5 +5,15 @@ import Profile from "./Profile";
 import CreatePost from "./CreatePost";
 import EditPost from "./EditPost";
 import PostPage from "./PostPage";
+import EditProfile from "./EditProfile";
 
-export { Home, Login, Register, Profile, CreatePost, PostPage, EditPost };
+export {
+  Home,
+  Login,
+  Register,
+  Profile,
+  CreatePost,
+  PostPage,
+  EditPost,
+  EditProfile,
+};

@@ -1,17 +1,15 @@
 import React, { useState, useReducer, useContext } from "react";
 import {
-  StyledInput,
-  StyledForm,
-  BlueButton,
-  StyledError,
   Title,
+  BlueButton,
+  StyledForm,
+  StyledInput,
+  StyledError,
 } from "../styles";
 import { UserContext } from "../context/user-context";
 
 const initialFormState = {
   name: "",
-  email: "",
-  password: "",
   userImg: null,
 };
 
@@ -25,12 +23,12 @@ function reducer(state, action) {
   return result;
 }
 
-function Register({ history }) {
+function EditProfile({ history }) {
   const { userApi } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [state, dispatch] = useReducer(reducer, initialFormState);
-  const { name, email, password, userImg } = state;
+  const { name, userImg } = state;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,16 +36,14 @@ function Register({ history }) {
     const formData = new FormData();
     formData.append("userImg", userImg);
     formData.append("name", name);
-    formData.append("email", email);
-    formData.append("password", password);
     try {
-      await userApi.register(formData);
+      await userApi.update(formData);
       dispatch({ type: "reset" });
       setLoading(false);
-      history.push("/login");
+      history.push("/profile");
     } catch (error) {
       console.log(error);
-      setError("Registration failed, please try again.");
+      setError("Profile edit failed, please try again.");
       setLoading(false);
     }
   };
@@ -64,7 +60,7 @@ function Register({ history }) {
 
   return (
     <div>
-      <Title>Register new account</Title>
+      <Title>{loading ? "Loading profile data..." : "Edit your profile"}</Title>
       {error && <StyledError>{error}</StyledError>}
       <StyledForm onSubmit={handleSubmit}>
         <StyledInput
@@ -74,26 +70,11 @@ function Register({ history }) {
           onChange={onChange}
           placeholder='Name'
         />
-        <StyledInput
-          type='text'
-          name='email'
-          value={email}
-          onChange={onChange}
-          placeholder='Email'
-        />
-        <StyledInput
-          type='password'
-          name='password'
-          value={password}
-          onChange={onChange}
-          placeholder='Password'
-        />
         <StyledInput type='file' name='userImg' onChange={saveImg} />
-        <BlueButton type='submit'>Register</BlueButton>
+        <BlueButton type='submit'>Submit</BlueButton>
       </StyledForm>
-      {loading && <p>Creating account...</p>}
     </div>
   );
 }
 
-export default Register;
+export default EditProfile;

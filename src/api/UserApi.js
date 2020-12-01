@@ -16,6 +16,13 @@ class UserApi {
   getUser() {
     return axios.get("/api/user/me");
   }
+  update(formData) {
+    return axios.put("/api/user/update", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  }
 }
 
 export { UserApi };

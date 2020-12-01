@@ -67,7 +67,7 @@ function PostPage({ match, history }) {
 
       {user && user.id === post.userId && (
         <ButtonGroup>
-          <OrangeButton onClick={() => history.push(`/edit-post/${post.id}`)}>
+          <OrangeButton onClick={() => history.push(`/post/${post.id}/edit`)}>
             Edit Post
           </OrangeButton>
           <DarkButton onClick={() => onPostDelete(post.id)}>

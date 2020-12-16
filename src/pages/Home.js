@@ -1,10 +1,10 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
-import { UserContext } from "../context/user-context";
-import Posts from "../components/Posts";
-import { Title } from "../styles";
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { ApiContext } from '../context';
+import { Posts } from '../components';
+import { Title } from '../styles';
 
 export const Home = ({ history }) => {
-  const { postApi } = useContext(UserContext);
+  const { postApi } = useContext(ApiContext);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -13,6 +13,7 @@ export const Home = ({ history }) => {
       setLoading(true);
       const { data } = await postApi.getAll();
       setPosts(data);
+      console.log(data);
       setLoading(false);
     } catch (error) {
       setLoading(false);

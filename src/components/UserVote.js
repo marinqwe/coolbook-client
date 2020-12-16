@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
-import { UpArrow, DownArrow, ArrowGroup } from "../styles";
-import { UserContext } from "../context/user-context";
+import React, { useContext, useEffect, useState } from 'react';
+import { UpArrow, DownArrow, ArrowGroup } from '../styles';
+import { UserContext } from '../context';
 
 function UserVote({ postId, likes, onUserVote }) {
   const { user } = useContext(UserContext);
@@ -28,7 +28,7 @@ function UserVote({ postId, likes, onUserVote }) {
       <ArrowGroup>
         <UpArrow liked={postLiked} onClick={() => onUserVote(true, postId)}>
           ▲
-        </UpArrow>{" "}
+        </UpArrow>{' '}
         {voteCount}
         <DownArrow
           disliked={postDisliked}

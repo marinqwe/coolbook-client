@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyledForm = styled.form`
   width: 80%;
@@ -11,7 +11,7 @@ export const StyledInput = styled.input`
   margin: 10px;
   font-size: large;
   width: 60%;
-  min-width: 200px;
+  min-width: 220px;
   border: none;
   border-bottom: 1px solid grey;
   border-radius: 2px;
@@ -22,7 +22,7 @@ export const StyledContent = styled.textarea`
   margin: 10px;
   font-size: large;
   width: 60%;
-  min-width: 200px;
+  min-width: 220px;
   border: none;
   border-bottom: 1px solid grey;
   border-radius: 2px;
@@ -40,4 +40,13 @@ export const StyledSearch = styled.form`
       margin: 10px 0;
     }
   }
+`;
+
+export const StyledNote = styled.span`
+  color: ${(props) => props.theme.grey};
+  font-size: calc(6px + 1vmin);
+  padding: 0 0 0 10px;
+  margin: 10px 0 0 10px;
+  width: 60%;
+  min-width: 220px;
 `;

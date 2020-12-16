@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
-import { DarkButton, OrangeButton } from "../styles";
-import { UserContext } from "../context/user-context";
-import { StyledImage } from "../styles";
+import React, { useContext } from 'react';
+import { DarkButton, OrangeButton } from '../styles';
+import { UserContext } from '../context';
+import { StyledImage } from '../styles';
 
 function Profile({ history }) {
   const { user, setUser, userApi } = useContext(UserContext);
@@ -12,14 +12,14 @@ function Profile({ history }) {
     <div>
       <StyledImage src={user.userImg} alt='profilePic' />
       <h2>{user.name}</h2>
-      <OrangeButton onClick={() => history.push("/profile/edit")}>
+      <OrangeButton onClick={() => history.push('/profile/edit')}>
         Edit profile
       </OrangeButton>
       <DarkButton
         onClick={async () => {
           await userApi.logout();
           setUser(null);
-          history.push("/login");
+          history.push('/login');
         }}
       >
         Log out

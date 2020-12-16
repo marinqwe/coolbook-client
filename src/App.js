@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
-import { UserContext } from "./context/user-context";
-import FullPageLoader from "./components/FullPageLoader";
-import AuthedApp from "./AuthedApp";
-import UnauthedApp from "./UnauthedApp";
+import React, { useContext } from 'react';
+import { UserContext } from './context';
+import { FullPageLoader } from './components';
+import AuthedApp from './AuthedApp';
+import UnauthedApp from './UnauthedApp';
 
 function App() {
   const { user, loadingUser } = useContext(UserContext);

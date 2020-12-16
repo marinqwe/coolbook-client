@@ -10,7 +10,6 @@ import {
 function ConfirmPostDelete({
   onPostDeleteConfirm,
   postId,
-  history,
   setDeletingPost,
 }) {
   const [loading, setLoading] = useState(false);
@@ -18,7 +17,6 @@ function ConfirmPostDelete({
     setLoading(true);
     await onPostDeleteConfirm(id);
     setLoading(false);
-    history.push("/");
   };
 
   return (

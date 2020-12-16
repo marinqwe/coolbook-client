@@ -1,22 +1,24 @@
-import React, { useState, useReducer, useContext } from "react";
+import React, { useState, useReducer, useContext } from 'react';
 import {
   StyledInput,
   StyledForm,
   BlueButton,
   StyledError,
   Title,
-} from "../styles";
-import { UserContext } from "../context/user-context";
+  StyledNote,
+} from '../styles';
+import { UserContext } from '../context';
 
 const initialFormState = {
-  name: "",
-  email: "",
-  password: "",
+  name: '',
+  email: '',
+  password: '',
   userImg: null,
+  dateOfBirth: '',
 };
 
 function reducer(state, action) {
-  if (action.type === "reset") {
+  if (action.type === 'reset') {
     return initialFormState;
   }
 
@@ -30,24 +32,25 @@ function Register({ history }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [state, dispatch] = useReducer(reducer, initialFormState);
-  const { name, email, password, userImg } = state;
+  const { name, email, password, userImg, dateOfBirth } = state;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     const formData = new FormData();
-    formData.append("userImg", userImg);
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("password", password);
+    formData.append('userImg', userImg);
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('dateOfBirth', dateOfBirth)
     try {
       await userApi.register(formData);
-      dispatch({ type: "reset" });
+      dispatch({ type: 'reset' });
       setLoading(false);
-      history.push("/login");
+      history.push('/login');
     } catch (error) {
       console.log(error);
-      setError("Registration failed, please try again.");
+      setError('Registration failed, please try again.');
       setLoading(false);
     }
   };
@@ -87,6 +90,18 @@ function Register({ history }) {
           value={password}
           onChange={onChange}
           placeholder='Password'
+        />
+        <StyledNote>
+          <em>
+            Note: date format is month/day/year. You can click the icon on the
+            right to choose a date.
+          </em>
+        </StyledNote>
+        <StyledInput
+          type='date'
+          name='dateOfBirth'
+          value={dateOfBirth}
+          onChange={onChange}
         />
         <StyledInput type='file' name='userImg' onChange={saveImg} />
         <BlueButton type='submit'>Register</BlueButton>

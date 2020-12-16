@@ -1,15 +1,10 @@
-import React, { useState, useContext } from "react";
-import {
-  StyledInput,
-  StyledForm,
-  BlueButton,
-  Title,
-} from "../styles";
-import { UserContext } from "../context/user-context";
+import React, { useState, useContext } from 'react';
+import { StyledInput, StyledForm, BlueButton, Title } from '../styles';
+import { UserContext } from '../context';
 
 function Login({ history }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   //const [error, setError] = useState(null);
   const { setUser, userApi } = useContext(UserContext);
@@ -21,7 +16,7 @@ function Login({ history }) {
     console.log(data);
     setUser(data.user);
     setLoading(false);
-    history.push("/");
+    history.push('/');
   };
   return (
     <div>
@@ -42,7 +37,7 @@ function Login({ history }) {
           placeholder='Password'
         />
         <BlueButton type='submit' disabled={loading}>
-          {loading ? "Logging in..." : "Loading"}
+          {loading ? 'Logging in...' : 'Log in'}
         </BlueButton>
       </StyledForm>
     </div>

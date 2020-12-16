@@ -1,14 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 import {
   StyledPostContent,
   StyledPostTitle,
   StyledPostPreview,
-} from "../styles";
-import UserVote from "./UserVote";
-import { UserContext } from "../context/user-context";
+  StyledPostHeader,
+  StyledDate,
+} from '../styles';
+import UserVote from './UserVote';
+import { UserContext, ApiContext } from '../context';
+import { formatDate } from '../helpers/formatDate';
 
 function Posts({ posts, history, fetchPosts }) {
-  const { likesApi, user } = useContext(UserContext);
+  const { user } = useContext(UserContext);
+  const { likesApi } = useContext(ApiContext);
   const onUserVote = async (userVote, postId) => {
     try {
       await likesApi.userVote({
@@ -29,11 +33,15 @@ function Posts({ posts, history, fetchPosts }) {
         postId={post.id}
         likes={post.userlikes}
       />
-      <StyledPostContent>
-        <StyledPostTitle onClick={() => history.push(`/post/${post.id}`)}>
-          {post.title}
-        </StyledPostTitle>
-        <div>{post.content}...</div>
+      <StyledPostContent onClick={() => history.push(`/post/${post.id}`)}>
+        <StyledPostHeader>
+          <div>
+            <StyledPostTitle>{post.title}</StyledPostTitle>
+            <StyledDate>posted on {formatDate(post.createdAt)}</StyledDate>
+          </div>
+          <span>({post.comment.length} comments)</span>
+        </StyledPostHeader>
+        <div>{post.content.substr(0, 50)}...</div>
       </StyledPostContent>
     </StyledPostPreview>
   ));

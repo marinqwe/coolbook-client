@@ -1,17 +1,18 @@
-import React from "react";
-import { useUser } from "../user";
-import { LikesApi, PostApi, UserApi } from "../api";
-const userApi = new UserApi();
-const postApi = new PostApi();
-const likesApi = new LikesApi();
+import React from 'react';
+import { useUser } from '../user';
+import { UserApi } from '../api';
 
 export const UserContext = React.createContext(null);
 
 export function UserProvider({ children }) {
   const { user, setUser, loadingUser } = useUser();
+  const contexts = {
+    user,
+    setUser,
+    loadingUser,
+    userApi: new UserApi(),
+  };
   return (
-    <UserContext.Provider value={{ user, setUser, postApi, userApi, likesApi, loadingUser }}>
-      {children}
-    </UserContext.Provider>
+    <UserContext.Provider value={contexts}>{children}</UserContext.Provider>
   );
 }

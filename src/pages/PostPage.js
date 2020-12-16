@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../context/user-context";
+import React, { useContext, useEffect, useState, useCallback } from 'react';
+import { UserContext, ApiContext } from '../context';
 import {
   StyledPostTitle,
   StyledPostContent,
@@ -7,32 +7,43 @@ import {
   ButtonGroup,
   DarkButton,
   StyledError,
-} from "../styles";
-import ConfirmPostDelete from "../components/ConfirmPostDelete";
+  StyledPost,
+} from '../styles';
+import { ConfirmPostDelete, Comments, AddComment } from '../components';
+import { getUrl } from '../helpers/getUrl';
+import ReactPlayer from 'react-player/youtube';
 
 function PostPage({ match, history }) {
   const [post, setPost] = useState({
-    title: "",
-    content: "",
+    title: '',
+    content: '',
     id: null,
     userId: null,
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [videos, setVideos] = useState([]);
   const [deletingPost, setDeletingPost] = useState(false);
-  const { postApi, user } = useContext(UserContext);
+  const { user } = useContext(UserContext);
+  const { postApi } = useContext(ApiContext);
+
+  const fetchPost = useCallback(async () => {
+    setLoading(true);
+    const {
+      data: { title, content, id, userId },
+    } = await postApi.get(match.params.id);
+    setPost({ title, content, id, userId });
+    setLoading(false);
+  }, [postApi, match.params.id]);
 
   useEffect(() => {
-    setLoading(true);
-    const fetchPost = async () => {
-      const {
-        data: { title, content, id, userId },
-      } = await postApi.get(match.params.id);
-      setPost({ title, content, id, userId });
-      setLoading(false);
-    };
     fetchPost();
-  }, [match.params.id, postApi]);
+
+    const ytLinks = getUrl(post.content);
+    if (ytLinks) {
+      setVideos([...ytLinks]);
+    }
+  }, [fetchPost, post.content]);
 
   const onPostDelete = () => {
     setError(null);
@@ -44,10 +55,11 @@ function PostPage({ match, history }) {
       const postDeleted = await postApi.delete(id);
       console.log(postDeleted);
       setDeletingPost(false);
+      history.push('/');
     } catch (error) {
       console.log(error);
       setDeletingPost(false);
-      setError("Delete post failed.");
+      setError('Delete post failed.');
     }
   };
 
@@ -62,7 +74,7 @@ function PostPage({ match, history }) {
       />
     );
   return (
-    <div>
+    <>
       {error && <StyledError>{error}</StyledError>}
 
       {user && user.id === post.userId && (
@@ -75,9 +87,18 @@ function PostPage({ match, history }) {
           </DarkButton>
         </ButtonGroup>
       )}
-      <StyledPostTitle>{post.title}</StyledPostTitle>
-      <StyledPostContent>{post.content}</StyledPostContent>
-    </div>
+      <StyledPost>
+        <StyledPostTitle>{post.title}</StyledPostTitle>
+        <StyledPostContent>{post.content}</StyledPostContent>
+        {videos.map((video, i) => (
+          <ReactPlayer key={i} url={video} controls light />
+        ))}
+      </StyledPost>
+      <div>
+        <AddComment postId={match.params.id} fetchPost={fetchPost} />
+        <Comments postId={match.params.id} />
+      </div>
+    </>
   );
 }
 

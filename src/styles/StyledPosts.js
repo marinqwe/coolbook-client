@@ -1,13 +1,19 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyledPostContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0 5%;
+  font-size: calc(9px + 1vmin);
+  width: 90%;
+  div {
+    margin: 10px;
+    cursor: pointer;
+    &:hover {
+      color: ${(props) => props.theme.blue};
+    }
+  }
 `;
 
 export const StyledPostTitle = styled.p`
-  font-size: calc(14px + 2vmin);
+  font-size: calc(22px + 1vmin);
   font-weight: bold;
   margin: 0;
   cursor: pointer;
@@ -32,4 +38,19 @@ export const StyledConfirmDelete = styled.span`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+export const StyledPost = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 5%;
+`;
+
+export const StyledPostHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 0 10px;
 `;

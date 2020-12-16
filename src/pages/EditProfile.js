@@ -6,7 +6,7 @@ import {
   StyledInput,
   StyledError,
 } from "../styles";
-import { UserContext } from "../context/user-context";
+import { UserContext } from "../context";
 
 const initialFormState = {
   name: "",

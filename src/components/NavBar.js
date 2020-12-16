@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
-import { StyledNavBar, StyledNavLink, StyledIcon, StyledUser } from "../styles";
-import { UserContext } from "../context/user-context";
+import React, { useContext } from 'react';
+import { StyledNavBar, StyledNavLink, StyledIcon, StyledUser } from '../styles';
+import { UserContext } from '../context';
 
 export const AuthedNavBar = () => {
   const { user } = useContext(UserContext);
@@ -35,7 +35,7 @@ export const UnauthedNavBar = () => {
         <StyledNavLink to='/login' activeClassName='yep'>
           Login
         </StyledNavLink>
-        <span style={{ color: "white" }}>/</span>
+        <span style={{ color: 'white' }}>/</span>
         <StyledNavLink to='/register' activeClassName='yep'>
           Register
         </StyledNavLink>

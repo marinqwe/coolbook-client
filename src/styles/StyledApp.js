@@ -1,19 +1,20 @@
-import React, { useContext } from "react";
-import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
-import { AuthedNavBar, UnauthedNavBar } from "../components/NavBar";
-import { UserContext } from "../context/user-context";
+import React, { useContext } from 'react';
+import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
+import { AuthedNavBar, UnauthedNavBar } from '../components/NavBar';
+import { UserContext } from '../context/user-context';
 
 const theme = {
-  red: "#FF0000",
-  black: "#393939",
-  orange: "#d1c143",
-  lightgrey: "#E1E1E1",
-  offWhite: "#EDEDED",
-  green: "#009933",
-  blue: "#2b5394",
-  lightblue: "#6298f0",
-  maxWidth: "1900px",
-  paperWhite: "#fdf5e8",
+  red: '#FF0000',
+  black: '#393939',
+  orange: '#d1c143',
+  lightgrey: '#E1E1E1',
+  offWhite: '#EDEDED',
+  green: '#009933',
+  blue: '#2b5394',
+  lightblue: '#6298f0',
+  maxWidth: '1900px',
+  paperWhite: '#fdf5e8',
+  grey: '#6e6e6e',
 };
 
 const StyledPage = styled.div`

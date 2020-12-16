@@ -1,15 +1,15 @@
-import React, { useState, useReducer, useContext, useEffect } from "react";
-import { StyledError, Title } from "../styles";
-import { UserContext } from "../context/user-context";
-import PostForm from "../components/PostForm";
+import React, { useState, useReducer, useContext, useEffect } from 'react';
+import { StyledError, Title } from '../styles';
+import { ApiContext } from '../context';
+import { PostForm } from '../components';
 
 const initialFormState = {
-  title: "",
-  content: "",
+  title: '',
+  content: '',
 };
 
 function reducer(state, action) {
-  if (action.type === "reset") {
+  if (action.type === 'reset') {
     return initialFormState;
   }
   if (!action.type) {
@@ -21,7 +21,7 @@ function reducer(state, action) {
 }
 
 function EditPost({ match, history }) {
-  const { postApi } = useContext(UserContext);
+  const { postApi } = useContext(ApiContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [state, dispatch] = useReducer(reducer, initialFormState);
@@ -50,12 +50,12 @@ function EditPost({ match, history }) {
         post: state,
         id: match.params.id,
       });
-      dispatch({ type: "reset" });
+      dispatch({ type: 'reset' });
       setLoading(false);
       history.push(`/post/${id}`);
     } catch (error) {
       console.log(error);
-      setError("Editing post failed, please try again.");
+      setError('Editing post failed, please try again.');
       setLoading(false);
     }
   };
@@ -65,7 +65,7 @@ function EditPost({ match, history }) {
   };
   return (
     <div>
-      <Title>{loading ? "Loading post..." : "Edit post"}</Title>
+      <Title>{loading ? 'Loading post...' : 'Edit post'}</Title>
       {error && <StyledError>{error}</StyledError>}
       <PostForm
         handleSubmit={handleSubmit}

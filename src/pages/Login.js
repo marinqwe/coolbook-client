@@ -21,7 +21,7 @@ function Login({ history }) {
   return (
     <div>
       <Title>Login to your account</Title>
-      <StyledForm onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <StyledInput
           type='text'
           name='email'
@@ -39,7 +39,7 @@ function Login({ history }) {
         <BlueButton type='submit' disabled={loading}>
           {loading ? 'Logging in...' : 'Log in'}
         </BlueButton>
-      </StyledForm>
+      </form>
     </div>
   );
 }

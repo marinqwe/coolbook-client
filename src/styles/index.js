@@ -4,7 +4,8 @@ import {
   StyledInput,
   StyledSearch,
   StyledContent,
-  StyledNote
+  StyledNote,
+  StyledField
 } from './StyledForm';
 import { StyledLink } from './StyledLink';
 import { StyledNavBar, StyledNavLink, StyledUser } from './StyledNav';
@@ -71,5 +72,6 @@ export {
   StyledDate,
   StyledRemove,
   StyledPostHeader,
-  StyledNote
+  StyledNote,
+  StyledField
 };

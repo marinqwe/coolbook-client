@@ -1,12 +1,24 @@
 import styled from 'styled-components';
+import { Form, Field } from 'formik';
 
-export const StyledForm = styled.form`
+export const StyledForm = styled(Form)`
   width: 80%;
   display: flex;
   flex-direction: column;
 `;
 
 export const StyledInput = styled.input`
+  padding: 10px;
+  margin: 10px;
+  font-size: large;
+  width: 60%;
+  min-width: 220px;
+  border: none;
+  border-bottom: 1px solid grey;
+  border-radius: 2px;
+`;
+
+export const StyledField = styled(Field)`
   padding: 10px;
   margin: 10px;
   font-size: large;

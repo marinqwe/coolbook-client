@@ -1,30 +1,63 @@
-import React from "react";
+import React from 'react';
 import {
   StyledInput,
   StyledForm,
   BlueButton,
   StyledContent,
-} from "../styles";
+  StyledError,
+} from '../styles';
+import { Formik } from 'formik';
+import { createPostSchema } from '../helpers/validationSchema';
 
-function PostForm({ handleSubmit, title, content, onChange }) {
+function PostForm({ handleSubmit, history }) {
   return (
-    <StyledForm onSubmit={handleSubmit}>
-      <StyledInput
-        type='text'
-        name='title'
-        value={title}
-        onChange={onChange}
-        placeholder='Title'
-      />
-      <StyledContent
-        type='textarea'
-        name='content'
-        value={content}
-        onChange={onChange}
-        placeholder='Content of your post'
-      />
-      <BlueButton type='submit'>Submit</BlueButton>
-    </StyledForm>
+    <Formik
+      initialValues={{
+        title: '',
+        content: '',
+      }}
+      validationSchema={createPostSchema}
+      onSubmit={async (values, { setSubmitting }) => {
+        await handleSubmit(values);
+        setSubmitting(false);
+        history.push('/');
+      }}
+    >
+      {({
+        isSubmitting,
+        values,
+        handleChange,
+        handleSubmit,
+        errors,
+        touched,
+      }) => (
+        <StyledForm onSubmit={handleSubmit}>
+          <StyledInput
+            type='text'
+            name='title'
+            value={values.title}
+            onChange={handleChange}
+            placeholder='Title'
+          />
+          {errors.title && touched.title && (
+            <StyledError>{errors.title}</StyledError>
+          )}
+          <StyledContent
+            type='textarea'
+            name='content'
+            value={values.content}
+            onChange={handleChange}
+            placeholder='Content of your post'
+          />
+          {errors.content && touched.content && (
+            <StyledError>{errors.content}</StyledError>
+          )}
+          <BlueButton type='submit' disabled={isSubmitting}>
+            Submit
+          </BlueButton>
+        </StyledForm>
+      )}
+    </Formik>
   );
 }
 

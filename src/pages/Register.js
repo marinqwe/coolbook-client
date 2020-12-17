@@ -119,9 +119,8 @@ function Register({ history }) {
             />
             {imgPreview && <StyledImage src={imgPreview} alt='userImg' />}
             <BlueButton type='submit' disabled={isSubmitting}>
-              Register
+              {isSubmitting ? 'Registering...' : 'Register'}
             </BlueButton>
-            {isSubmitting && <p>Registering user...</p>}
           </StyledForm>
         )}
       </Formik>

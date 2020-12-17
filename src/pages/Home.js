@@ -13,7 +13,6 @@ export const Home = ({ history }) => {
       setLoading(true);
       const { data } = await postApi.getAll();
       setPosts(data);
-      console.log(data);
       setLoading(false);
     } catch (error) {
       setLoading(false);

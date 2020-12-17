@@ -1,45 +1,79 @@
 import React, { useState, useContext } from 'react';
-import { StyledInput, StyledForm, BlueButton, Title } from '../styles';
+import {
+  StyledInput,
+  StyledForm,
+  BlueButton,
+  Title,
+  StyledError,
+} from '../styles';
 import { UserContext } from '../context';
+import { Formik } from 'formik';
+import { loginSchema } from '../helpers/validationSchema';
 
 function Login({ history }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  //const [error, setError] = useState(null);
   const { setUser, userApi } = useContext(UserContext);
+  const [error, setError] = useState(null);
 
-  const handleSubmit = async (e) => {
-    setLoading(true);
-    e.preventDefault();
-    const { data } = await userApi.login({ email, password });
-    console.log(data);
-    setUser(data.user);
-    setLoading(false);
-    history.push('/');
+  const handleSubmit = async ({ email, password }) => {
+    try {
+      const { data } = await userApi.login({ email, password });
+      setUser(data.user);
+    } catch (error) {
+      console.log(error);
+      setError('Login failed, please try again.');
+    }
   };
   return (
     <div>
       <Title>Login to your account</Title>
-      <form onSubmit={handleSubmit}>
-        <StyledInput
-          type='text'
-          name='email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder='Email'
-        />
-        <StyledInput
-          type='password'
-          name='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder='Password'
-        />
-        <BlueButton type='submit' disabled={loading}>
-          {loading ? 'Logging in...' : 'Log in'}
-        </BlueButton>
-      </form>
+      {error && <StyledError>{error}</StyledError>}
+      <Formik
+        initialValues={{
+          email: '',
+          password: '',
+        }}
+        validationSchema={loginSchema}
+        onSubmit={async (values, { setSubmitting }) => {
+          await handleSubmit(values);
+          setSubmitting(false);
+          history.push('/');
+        }}
+      >
+        {({
+          isSubmitting,
+          values,
+          handleChange,
+          handleSubmit,
+          errors,
+          touched,
+        }) => (
+          <StyledForm onSubmit={handleSubmit}>
+            <StyledInput
+              type='text'
+              name='email'
+              value={values.email}
+              onChange={handleChange}
+              placeholder='Email'
+            />
+            {errors.email && touched.email && (
+              <StyledError>{errors.email}</StyledError>
+            )}
+            <StyledInput
+              type='password'
+              name='password'
+              value={values.password}
+              onChange={handleChange}
+              placeholder='Password'
+            />
+            {errors.password && touched.password && (
+              <StyledError>{errors.password}</StyledError>
+            )}
+            <BlueButton type='submit' disabled={isSubmitting}>
+              {isSubmitting ? 'Logging in...' : 'Log in'}
+            </BlueButton>
+          </StyledForm>
+        )}
+      </Formik>
     </div>
   );
 }

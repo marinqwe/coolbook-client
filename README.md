@@ -2,8 +2,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Frontend for coolbook-api
 
-A simplified facebook-like app, with user registration, login, posts, comments etc.<br/>
-Check out the API here: [coolbook-api](https://github.com/marinqwe/coolbook-api)
+A simplified facebook-like app, with user registration, login, posts, comments, chat etc.<br/>
+API code: [coolbook-api](https://github.com/marinqwe/coolbook-api)
 
 ## Available Scripts
 

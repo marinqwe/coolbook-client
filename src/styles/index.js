@@ -5,6 +5,7 @@ import {
   StyledSearch,
   StyledContent,
   StyledNote,
+  StyledChatSend,
 } from './StyledForm';
 import { StyledLink } from './StyledLink';
 import { StyledNavBar, StyledNavLink, StyledUser } from './StyledNav';
@@ -35,9 +36,30 @@ import {
   StyledDate,
   StyledRemove,
 } from './StyledComments';
+import {
+  StyledChat,
+  StyledChatJoin,
+  Room,
+  OpenChat,
+  StyledChatInfo,
+  StyledMessage,
+  StyledMessageHead,
+  StyledMessageText,
+} from './StyledChat';
+import { StyledHome } from './StyledHome';
 
 export {
+  StyledHome,
+  StyledChat,
+  StyledChatJoin,
+  StyledChatInfo,
+  StyledMessage,
+  StyledMessageHead,
+  StyledMessageText,
+  Room,
+  OpenChat,
   StyledForm,
+  StyledChatSend,
   StyledInput,
   StyledSearch,
   StyledContent,

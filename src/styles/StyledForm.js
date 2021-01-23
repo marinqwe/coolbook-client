@@ -7,6 +7,11 @@ export const StyledForm = styled(Form)`
   flex-direction: column;
 `;
 
+export const StyledChatSend = styled(Form)`
+width: 80%;
+display: flex;
+`;
+
 export const StyledInput = styled.input`
   padding: 10px;
   margin: 10px;

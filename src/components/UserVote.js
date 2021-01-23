@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { UpArrow, DownArrow, ArrowGroup } from '../styles';
-import { UserContext } from '../context';
+import { useUserCtx } from '../providers';
 
 function UserVote({ postId, likes, onUserVote }) {
-  const { user } = useContext(UserContext);
+  const { user } = useUserCtx();
   const [postLiked, setPostLiked] = useState(false);
   const [postDisliked, setPostDisliked] = useState(false);
 

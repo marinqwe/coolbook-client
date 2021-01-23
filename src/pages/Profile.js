@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { DarkButton, OrangeButton } from '../styles';
-import { UserContext } from '../context';
+import { useUserCtx } from '../providers';
 import { StyledImage } from '../styles';
 
 function Profile({ history }) {
-  const { user, setUser, userApi } = useContext(UserContext);
+  const { user, setUser, userApi } = useUserCtx();
   if (!user) {
     return <p>Loading user...</p>;
   }

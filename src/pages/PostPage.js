@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState, useCallback } from 'react';
-import { UserContext, ApiContext } from '../context';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useUserCtx, useApiCtx } from '../providers';
 import {
   StyledPostTitle,
   StyledPostContent,
@@ -24,8 +24,8 @@ function PostPage({ match, history }) {
   const [error, setError] = useState(null);
   const [videos, setVideos] = useState([]);
   const [deletingPost, setDeletingPost] = useState(false);
-  const { user } = useContext(UserContext);
-  const { postApi } = useContext(ApiContext);
+  const { user } = useUserCtx();
+  const { postApi } = useApiCtx();
 
   const fetchPost = useCallback(async () => {
     setLoading(true);
@@ -33,17 +33,19 @@ function PostPage({ match, history }) {
       data: { title, content, id, userId },
     } = await postApi.get(match.params.id);
     setPost({ title, content, id, userId });
+    let ytLinks = await getUrl(content);
+    console.log(ytLinks);
+
+    //TODO: fix embedding
+    // if (ytLinks) {
+    //   setVideos(ytLinks);
+    // }
     setLoading(false);
   }, [postApi, match.params.id]);
 
   useEffect(() => {
     fetchPost();
-
-    const ytLinks = getUrl(post.content);
-    if (ytLinks) {
-      setVideos([...ytLinks]);
-    }
-  }, [fetchPost, post.content]);
+  }, [fetchPost]);
 
   const onPostDelete = () => {
     setError(null);
@@ -53,11 +55,9 @@ function PostPage({ match, history }) {
   const onPostDeleteConfirm = async (id) => {
     try {
       const postDeleted = await postApi.delete(id);
-      console.log(postDeleted);
       setDeletingPost(false);
       history.push('/');
     } catch (error) {
-      console.log(error);
       setDeletingPost(false);
       setError('Delete post failed.');
     }

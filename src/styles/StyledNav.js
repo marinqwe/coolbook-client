@@ -1,25 +1,25 @@
-import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const StyledNavBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 4vw;
-  background-color: ${(props) => props.theme.black};
+  margin-bottom: 3vh;
+  border-radius: 5px;
 `;
 
 export const StyledNavLink = styled(NavLink)`
+  font-size: calc(8px + 2vmin);
   padding: 10px;
   cursor: pointer;
   text-decoration: none;
-  font-size: large;
-  color: ${(props) => props.theme.lightgrey};
+  color: ${(props) => props.theme.black};
   &.${(props) => props.activeClassName} {
-    color: ${(props) => props.theme.lightblue};
+    color: ${(props) => props.theme.blue};
   }
   &:hover {
-    color: ${(props) => props.theme.lightblue};
+    color: ${(props) => props.theme.blue};
   }
 `;
 

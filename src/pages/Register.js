@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import {
   StyledInput,
   StyledForm,
@@ -8,12 +8,12 @@ import {
   StyledNote,
   StyledImage,
 } from '../styles';
-import { UserContext } from '../context';
+import { useUserCtx } from '../providers';
 import { Formik } from 'formik';
 import { registrationSchema } from '../helpers/validationSchema';
 
 function Register({ history }) {
-  const { userApi } = useContext(UserContext);
+  const { userApi } = useUserCtx();
   const [error, setError] = useState(null);
   const [imgPreview, setImgPreview] = useState('');
 
@@ -28,7 +28,6 @@ function Register({ history }) {
     try {
       await userApi.register(formData);
     } catch (error) {
-      console.log(error);
       setError('Registration failed, please try again.');
     }
   };

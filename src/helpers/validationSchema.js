@@ -22,4 +22,8 @@ let addCommentSchema = yup.object().shape({
   comment: yup.string().min(1).required('No empty comments.'),
 });
 
-export { registrationSchema, loginSchema, createPostSchema, addCommentSchema };
+let chatMsgSchema = yup.object().shape({
+  message: yup.string().min(1).required('No spam.'),
+});
+
+export { registrationSchema, loginSchema, createPostSchema, addCommentSchema, chatMsgSchema };

@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useContext } from "react";
+import React, { useState, useReducer } from "react";
 import {
   Title,
   BlueButton,
@@ -6,7 +6,7 @@ import {
   StyledInput,
   StyledError,
 } from "../styles";
-import { UserContext } from "../context";
+import { useUserCtx } from "../providers";
 
 const initialFormState = {
   name: "",
@@ -24,7 +24,7 @@ function reducer(state, action) {
 }
 
 function EditProfile({ history }) {
-  const { userApi } = useContext(UserContext);
+  const { userApi } = useUserCtx();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [state, dispatch] = useReducer(reducer, initialFormState);
@@ -42,7 +42,6 @@ function EditProfile({ history }) {
       setLoading(false);
       history.push("/profile");
     } catch (error) {
-      console.log(error);
       setError("Profile edit failed, please try again.");
       setLoading(false);
     }

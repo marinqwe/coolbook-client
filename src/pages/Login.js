@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import {
   StyledInput,
   StyledForm,
@@ -6,12 +6,12 @@ import {
   Title,
   StyledError,
 } from '../styles';
-import { UserContext } from '../context';
+import { useUserCtx } from '../providers';
 import { Formik } from 'formik';
 import { loginSchema } from '../helpers/validationSchema';
 
 function Login({ history }) {
-  const { setUser, userApi } = useContext(UserContext);
+  const { setUser, userApi } = useUserCtx();
   const [error, setError] = useState(null);
 
   const handleSubmit = async ({ email, password }) => {
@@ -19,7 +19,6 @@ function Login({ history }) {
       const { data } = await userApi.login({ email, password });
       setUser(data.user);
     } catch (error) {
-      console.log(error);
       setError('Login failed, please try again.');
     }
   };

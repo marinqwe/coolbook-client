@@ -1,13 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import { StyledInput, StyledForm, BlueButton, StyledError } from '../styles';
-import { ApiContext, UserContext } from '../context';
+import { useApiCtx, useUserCtx } from '../providers';
 import { Formik } from 'formik';
 import { addCommentSchema } from '../helpers/validationSchema';
 
 function AddComment({ postId, fetchPost }) {
-  const [comment, setComment] = useState('');
-  const { commentsApi } = useContext(ApiContext);
-  const { user } = useContext(UserContext);
+  const { commentsApi } = useApiCtx();
+  const { user } = useUserCtx();
 
   const handleSubmit = async ({ comment }) => {
     try {

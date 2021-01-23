@@ -1,13 +1,13 @@
-import React, { useEffect, useContext, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { StyledComments } from '../styles';
 import Comment from './Comment';
-import { ApiContext, UserContext } from '../context';
+import { useApiCtx, useUserCtx } from '../providers';
 
 function Comments({ postId }) {
   const [loading, setLoading] = useState(false);
   const [comments, setComments] = useState([]);
-  const { commentsApi } = useContext(ApiContext);
-  const { user } = useContext(UserContext);
+  const { commentsApi } = useApiCtx();
+  const { user } = useUserCtx();
 
   const fetchComments = useCallback(async () => {
     setLoading(true);
@@ -27,8 +27,7 @@ function Comments({ postId }) {
 
   const onRemoveComment = async (id) => {
     try {
-      const commentRemoved = await commentsApi.delete(id);
-      console.log(commentRemoved);
+      await commentsApi.delete(id);
     } catch (error) {
       console.log(error);
     }

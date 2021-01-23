@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 
 export const StyledPostContent = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   font-size: calc(9px + 1vmin);
-  width: 90%;
+  padding: 10px;
   div {
-    margin: 10px;
     cursor: pointer;
     &:hover {
       color: ${(props) => props.theme.blue};
@@ -13,7 +17,7 @@ export const StyledPostContent = styled.div`
 `;
 
 export const StyledPostTitle = styled.p`
-  font-size: calc(22px + 1vmin);
+  font-size: calc(18px + 1vmin);
   font-weight: bold;
   margin: 0;
   cursor: pointer;
@@ -29,8 +33,6 @@ export const StyledPostPreview = styled.div`
   background: ${(props) => props.theme.lightgrey};
   border: 1px solid white;
   border-radius: 5px;
-  width: 90%;
-  max-width: 700px;
 `;
 
 export const StyledConfirmDelete = styled.span`
@@ -50,7 +52,5 @@ export const StyledPost = styled.div`
 export const StyledPostHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
-
-  margin: 0 10px;
+  margin-bottom: 10px;
 `;

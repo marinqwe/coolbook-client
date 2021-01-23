@@ -1,11 +1,11 @@
-import React, { useState, useReducer, useContext } from 'react';
+import React, { useState } from 'react';
 import { StyledError, Title } from '../styles';
-import { UserContext, ApiContext } from '../context';
+import { useApiCtx, useUserCtx } from '../providers';
 import { PostForm } from '../components';
 
 function CreatePost({ history }) {
-  const { user } = useContext(UserContext);
-  const { postApi } = useContext(ApiContext);
+  const { user } = useUserCtx();
+  const { postApi } = useApiCtx();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -18,8 +18,7 @@ function CreatePost({ history }) {
       //REDIRECT TO POST AFTER CREATION
       //history.push(`/post/${postId}`);
     } catch (error) {
-      console.log(error);
-      setError('Creating post failed, please try again.');
+      setError('There was an error, please try again.');
       setLoading(false);
     }
   };

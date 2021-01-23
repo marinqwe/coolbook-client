@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { StyledNavBar, StyledNavLink, StyledIcon, StyledUser } from '../styles';
-import { UserContext } from '../context';
+import { useUserCtx } from '../providers';
 
 export const AuthedNavBar = () => {
-  const { user } = useContext(UserContext);
+  const { user } = useUserCtx();
 
   return (
     <StyledNavBar>
@@ -12,7 +12,7 @@ export const AuthedNavBar = () => {
           Home
         </StyledNavLink>
         <StyledNavLink to='/create-post' activeClassName='yep'>
-          Create post
+          New post
         </StyledNavLink>
       </div>
       <StyledNavLink to='/profile' activeClassName='yep'>

@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
-import { UserContext } from './context';
+import React from 'react';
+import { useUserCtx } from './providers';
 import { FullPageLoader } from './components';
 import AuthedApp from './AuthedApp';
 import UnauthedApp from './UnauthedApp';
 
 function App() {
-  const { user, loadingUser } = useContext(UserContext);
+  const { user, loadingUser } = useUserCtx();
 
   if (loadingUser) {
     return <FullPageLoader />;

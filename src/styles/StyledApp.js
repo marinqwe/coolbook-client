@@ -1,7 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
-import { AuthedNavBar, UnauthedNavBar } from '../components/NavBar';
-import { UserContext } from '../context/user-context';
 
 const theme = {
   red: '#FF0000',
@@ -48,11 +46,8 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function StyledApp({ children }) {
-  const { user } = useContext(UserContext);
-
   return (
     <ThemeProvider theme={theme}>
-      {user ? <AuthedNavBar /> : <UnauthedNavBar />}
       <StyledPage>
         <GlobalStyle />
         <Inner>{children}</Inner>

@@ -5,6 +5,8 @@ import FullPageLoader from './FullPageLoader';
 import PostForm from './PostForm';
 import Posts from './Posts';
 import UserVote from './UserVote';
+import ChatJoin from './ChatJoin';
+import Chat from './Chat';
 
 export {
   AddComment,
@@ -14,4 +16,6 @@ export {
   PostForm,
   Posts,
   UserVote,
+  Chat,
+  ChatJoin,
 };

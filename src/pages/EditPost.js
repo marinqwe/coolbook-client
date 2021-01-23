@@ -1,6 +1,6 @@
-import React, { useState, useReducer, useContext, useEffect } from 'react';
+import React, { useState, useReducer,  useEffect } from 'react';
 import { StyledError, Title } from '../styles';
-import { ApiContext } from '../context';
+import { useApiCtx } from '../providers';
 import { PostForm } from '../components';
 
 const initialFormState = {
@@ -21,7 +21,7 @@ function reducer(state, action) {
 }
 
 function EditPost({ match, history }) {
-  const { postApi } = useContext(ApiContext);
+  const { postApi } = useApiCtx();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [state, dispatch] = useReducer(reducer, initialFormState);
@@ -54,7 +54,6 @@ function EditPost({ match, history }) {
       setLoading(false);
       history.push(`/post/${id}`);
     } catch (error) {
-      console.log(error);
       setError('Editing post failed, please try again.');
       setLoading(false);
     }

@@ -1,29 +1,34 @@
 import * as yup from 'yup';
 
+const nameSchema = yup.string().min(2);
+const emailSchema = yup
+  .string()
+  .email('Please provide a valid email.')
+  .required('Email field required.');
+const passwordSchema = yup.string().min(6).required('Password field required.');
+const commentSchema = yup.string().min(1);
 
-let registrationSchema = yup.object().shape({
-  name: yup.string().min(2).required('Name is required.'),
-  email: yup.string().email('Please provide a valid email.').required('Email field required.'),
-  password: yup.string().min(6).required('Password field required.'),
+export let registrationSchema = yup.object().shape({
+  name: nameSchema.required('Name is required.'),
+  email: emailSchema,
+  password: passwordSchema,
   dateOfBirth: yup.date().min('1-1-1900').max('12-31-2020').required(),
 });
 
-let loginSchema = yup.object().shape({
-  email: yup.string().email('Please provide a valid email.').required('Email field required.'),
-  password: yup.string().min(6).required('Password field required.'),
+export let loginSchema = yup.object().shape({
+  email: emailSchema,
+  password: passwordSchema,
 });
 
-let createPostSchema = yup.object().shape({
-  title: yup.string().min(2).required('Title is required.'),
-  content: yup.string().min(2).required('Content is required.'),
+export let createPostSchema = yup.object().shape({
+  title: nameSchema.required('Title is required.'),
+  content: nameSchema.required('Content is required.'),
 });
 
-let addCommentSchema = yup.object().shape({
-  comment: yup.string().min(1).required('No empty comments.'),
+export let addCommentSchema = yup.object().shape({
+  comment: commentSchema.required('No empty comments.'),
 });
 
-let chatMsgSchema = yup.object().shape({
-  message: yup.string().min(1).required('No spam.'),
+export let chatMsgSchema = yup.object().shape({
+  message: commentSchema.required('No spam.'),
 });
-
-export { registrationSchema, loginSchema, createPostSchema, addCommentSchema, chatMsgSchema };

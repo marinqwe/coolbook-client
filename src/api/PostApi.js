@@ -1,19 +1,24 @@
-import axios from "axios";
+import axios from 'axios';
 class PostApi {
-  create(formData) {
-    return axios.post("/api/post", formData);
+  url;
+  constructor(url) {
+    this.url = url;
   }
-  getAll() {
-    return axios.get("/api/post");
+
+  create(formData) {
+    return axios.post(this.url, formData);
+  }
+  getAll(page) {
+    return axios.get(`${this.url}/all/${page}`);
   }
   get(id) {
-    return axios.get(`/api/post/${id}`);
+    return axios.get(`${this.url}/${id}`);
   }
   edit({ post, id }) {
-    return axios.put(`/api/post/${id}`, post);
+    return axios.put(`${this.url}/${id}`, post);
   }
   delete(id) {
-    return axios.delete(`/api/post/${id}`);
+    return axios.delete(`${this.url}/${id}`);
   }
 }
 

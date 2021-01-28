@@ -10,7 +10,7 @@ import {
   StyledPost,
 } from '../styles';
 import { ConfirmPostDelete, Comments, AddComment } from '../components';
-import { getUrl } from '../helpers/getUrl';
+import { getYoutubeLinks } from '../helpers/getYoutubeLinks';
 import ReactPlayer from 'react-player/youtube';
 
 function PostPage({ match, history }) {
@@ -33,7 +33,7 @@ function PostPage({ match, history }) {
       data: { title, content, id, userId },
     } = await postApi.get(match.params.id);
     setPost({ title, content, id, userId });
-    let ytLinks = await getUrl(content);
+    let ytLinks = getYoutubeLinks(content);
     console.log(ytLinks);
 
     //TODO: fix embedding

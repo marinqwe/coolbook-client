@@ -47,6 +47,7 @@ import {
   StyledMessageText,
 } from './StyledChat';
 import { StyledHome } from './StyledHome';
+import { StyledPagination } from './StyledPagination';
 
 export {
   StyledHome,
@@ -94,4 +95,5 @@ export {
   StyledRemove,
   StyledPostHeader,
   StyledNote,
+  StyledPagination,
 };

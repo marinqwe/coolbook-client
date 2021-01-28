@@ -1,25 +1,29 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useApiCtx, useUserCtx } from '../providers';
-import { Posts } from '../components';
+import { useApiCtx, usePaginationCtx, useUserCtx } from '../providers';
+import { Posts, ChatJoin, PostPagination } from '../components';
 import { Title, StyledHome } from '../styles';
-import { ChatJoin } from '../components';
 
 export const AuthedHome = ({ history }) => {
   const { postApi } = useApiCtx();
   const { user } = useUserCtx();
+  const { page, setTotalPosts, setPostsPerPage } = usePaginationCtx();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const fetchPosts = useCallback(async () => {
     try {
       setLoading(true);
-      const { data } = await postApi.getAll();
-      setPosts(data);
+      const {
+        data: { posts, pagingInfo },
+      } = await postApi.getAll(page);
+      setPosts(posts);
+      setPostsPerPage(pagingInfo.postsPerPage);
+      setTotalPosts(pagingInfo.totalPosts);
       setLoading(false);
     } catch (error) {
       setLoading(false);
     }
-  }, [postApi]);
+  }, [postApi, page]);
 
   useEffect(() => {
     fetchPosts();
@@ -33,7 +37,11 @@ export const AuthedHome = ({ history }) => {
     <StyledHome>
       <div>
         {posts.length ? (
-          <Posts posts={posts} fetchPosts={fetchPosts} history={history} />
+          <>
+            <PostPagination />
+            <Posts posts={posts} fetchPosts={fetchPosts} history={history} />
+            <PostPagination />
+          </>
         ) : (
           <p>It's empty in here. Click "New Post" to fill the void.</p>
         )}
@@ -45,19 +53,24 @@ export const AuthedHome = ({ history }) => {
 
 export const UnauthedHome = ({ history }) => {
   const { postApi } = useApiCtx();
+  const { page, setTotalPosts, setPostsPerPage } = usePaginationCtx();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const fetchPosts = useCallback(async () => {
     try {
       setLoading(true);
-      const { data } = await postApi.getAll();
-      setPosts(data);
+      const {
+        data: { posts, pagingInfo },
+      } = await postApi.getAll(page);
+      setPosts(posts);
+      setPostsPerPage(pagingInfo.postsPerPage);
+      setTotalPosts(pagingInfo.totalPosts);
       setLoading(false);
     } catch (error) {
       setLoading(false);
     }
-  }, [postApi]);
+  }, [postApi, page]);
 
   useEffect(() => {
     fetchPosts();
@@ -71,7 +84,11 @@ export const UnauthedHome = ({ history }) => {
     <StyledHome>
       <div>
         {posts.length ? (
-          <Posts posts={posts} fetchPosts={fetchPosts} history={history} />
+          <>
+            <PostPagination />
+            <Posts posts={posts} fetchPosts={fetchPosts} history={history} />
+            <PostPagination />
+          </>
         ) : (
           <p>It's empty in here.</p>
         )}

@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { formatChatMsg } from '../helpers/formatChatMsg';
-import socketIOclient from 'socket.io-client';
+import socketIOClient from 'socket.io-client';
 
 export function useChat(user) {
   const [messages, setMessages] = useState([]);
@@ -9,7 +9,7 @@ export function useChat(user) {
 
   useEffect(() => {
     if (user) {
-      socketRef.current = socketIOclient('http://localhost:8000', {
+      socketRef.current = socketIOClient('http://localhost:8000', {
         query: `user=${user.name}&id=${user.id}`,
       });
 

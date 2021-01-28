@@ -2,17 +2,17 @@ import { useEffect, useState } from 'react';
 import { UserApi } from '../api';
 import { useChat } from './useChat';
 
-const userApi = new UserApi();
+const userApiUrl = '/api/user';
+const userApi = new UserApi(userApiUrl);
 
 export function useUser() {
   const [user, setUser] = useState(null);
-  const [loadingUser, setLoadingUser] = useState(false);
-  const { usersOnline, messages, sendMessage, setMessages, onRoomJoin, onRoomLeave } = useChat(user);
+  const [loadingUser, setLoadingUser] = useState(true);
+  const useChatValues = useChat(user);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        setLoadingUser(true);
         const { data } = await userApi.getUser();
         setUser(data);
         setLoadingUser(false);
@@ -28,11 +28,6 @@ export function useUser() {
     setUser,
     loadingUser,
     userApi,
-    messages,
-    sendMessage,
-    usersOnline,
-    setMessages,
-    onRoomJoin,
-    onRoomLeave,
+    ...useChatValues,
   };
 }

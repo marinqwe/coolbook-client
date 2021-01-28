@@ -7,6 +7,7 @@ import Posts from './Posts';
 import UserVote from './UserVote';
 import ChatJoin from './ChatJoin';
 import Chat from './Chat';
+import PostPagination from './PostPagination';
 
 export {
   AddComment,
@@ -18,4 +19,5 @@ export {
   UserVote,
   Chat,
   ChatJoin,
+  PostPagination,
 };

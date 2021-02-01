@@ -33,13 +33,13 @@ function PostPage({ match, history }) {
       data: { title, content, id, userId },
     } = await postApi.get(match.params.id);
     setPost({ title, content, id, userId });
-    let ytLinks = getYoutubeLinks(content);
+    const ytLinks = getYoutubeLinks(content);
     console.log(ytLinks);
 
-    //TODO: fix embedding
-    // if (ytLinks) {
-    //   setVideos(ytLinks);
-    // }
+    if (ytLinks) {
+      //limit number of embedded videos to 3
+      setVideos(ytLinks.slice(0, 3));
+    }
     setLoading(false);
   }, [postApi, match.params.id]);
 
@@ -54,7 +54,7 @@ function PostPage({ match, history }) {
 
   const onPostDeleteConfirm = async (id) => {
     try {
-      const postDeleted = await postApi.delete(id);
+      await postApi.delete(id);
       setDeletingPost(false);
       history.push('/');
     } catch (error) {

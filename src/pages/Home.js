@@ -23,7 +23,7 @@ export const AuthedHome = ({ history }) => {
     } catch (error) {
       setLoading(false);
     }
-  }, [postApi, page]);
+  }, [postApi, page, setTotalPosts, setPostsPerPage]);
 
   useEffect(() => {
     fetchPosts();
@@ -70,7 +70,7 @@ export const UnauthedHome = ({ history }) => {
     } catch (error) {
       setLoading(false);
     }
-  }, [postApi, page]);
+  }, [postApi, page, setTotalPosts, setPostsPerPage]);
 
   useEffect(() => {
     fetchPosts();

@@ -4,7 +4,7 @@ import socketIOClient from 'socket.io-client';
 
 export function useChat(user) {
   const [messages, setMessages] = useState([]);
-  const [usersOnline, setUsersOnline] = useState(new Map());
+  //const [usersOnline, setUsersOnline] = useState(new Map());
   const socketRef = useRef(null);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export function useChat(user) {
   return {
     messages,
     sendMessage,
-    usersOnline,
+    //usersOnline,
     setMessages,
     onRoomJoin,
     onRoomLeave,

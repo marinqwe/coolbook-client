@@ -8,7 +8,7 @@ function PostPagination() {
 
   useEffect(() => {
     setPageCount(Math.ceil(totalPosts / postsPerPage) || 1);
-  }, []);
+  }, [totalPosts, postsPerPage]);
   const handleOnClick = (value) => {
     setPage(page + value);
   };

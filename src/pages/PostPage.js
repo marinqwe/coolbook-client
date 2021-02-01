@@ -33,9 +33,8 @@ function PostPage({ match, history }) {
       data: { title, content, id, userId },
     } = await postApi.get(match.params.id);
     setPost({ title, content, id, userId });
-    const ytLinks = getYoutubeLinks(content);
-    console.log(ytLinks);
 
+    const ytLinks = getYoutubeLinks(content);
     if (ytLinks) {
       //limit number of embedded videos to 3
       setVideos(ytLinks.slice(0, 3));

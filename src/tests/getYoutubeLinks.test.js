@@ -23,7 +23,7 @@ describe('Get Youtube links function', () => {
     expect(getYoutubeLinks(stringToParse)).toEqual(expectedArray);
   });
 
-  test('Returns an array containing youtube links', () => {
+  test('Multiple strings and links return an array containing all youtube links', () => {
     const stringToParse =
       'One www.youtube.com/watch?v=FgnxcUQ5vho Two youtu.be/FgnxcUQ5vho Three https://www.youtube.com/watch?v=FgnxcUQ5vho Four youtube.com/watch?v=FgnxcUQ5vho';
     const expectedArray = [

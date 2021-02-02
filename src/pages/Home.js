@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useApiCtx, usePaginationCtx, useUserCtx } from '../providers';
+import { useApiCtx, usePaginationCtx } from '../providers';
 import { Posts, ChatJoin, PostPagination } from '../components';
 import { Title, StyledHome } from '../styles';
 
 export const AuthedHome = ({ history }) => {
   const { postApi } = useApiCtx();
-  const { user } = useUserCtx();
   const { page, setTotalPosts, setPostsPerPage } = usePaginationCtx();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -46,7 +45,7 @@ export const AuthedHome = ({ history }) => {
           <p>It's empty in here. Click "New Post" to fill the void.</p>
         )}
       </div>
-      {user && <ChatJoin />}
+      <ChatJoin />
     </StyledHome>
   );
 };

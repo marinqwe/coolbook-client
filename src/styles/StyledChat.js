@@ -54,6 +54,7 @@ export const StyledChatJoin = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
+  margin: 1rem 0;
 `;
 
 export const StyledChatInfo = styled.div`

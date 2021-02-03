@@ -55,6 +55,9 @@ export const StyledChatJoin = styled.div`
   display: flex;
   justify-content: center;
   margin: 1rem 0;
+  @media screen and (max-width: 600px) {
+    justify-content: flex-start;
+  }
 `;
 
 export const StyledChatInfo = styled.div`

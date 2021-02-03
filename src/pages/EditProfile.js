@@ -1,77 +1,100 @@
-import React, { useState, useReducer } from "react";
+import React, { useState } from 'react';
 import {
   Title,
   BlueButton,
   StyledForm,
   StyledInput,
   StyledError,
-} from "../styles";
-import { useUserCtx } from "../providers";
-
-const initialFormState = {
-  name: "",
-  userImg: null,
-};
-
-function reducer(state, action) {
-  if (action.type === "reset") {
-    return initialFormState;
-  }
-
-  const result = { ...state };
-  result[action.type] = action.value;
-  return result;
-}
+  StyledImage,
+} from '../styles';
+import { useUserCtx } from '../providers';
+import { Formik } from 'formik';
+import { updateProfileSchema } from '../helpers/validationSchema';
 
 function EditProfile({ history }) {
   const { userApi } = useUserCtx();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [state, dispatch] = useReducer(reducer, initialFormState);
-  const { name, userImg } = state;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    const formData = new FormData();
-    formData.append("userImg", userImg);
-    formData.append("name", name);
+  const [imgPreview, setImgPreview] = useState('');
+
+  const handleSubmit = async (values) => {
+    let formData = new FormData();
+
+    formData.append('userImg', values.userImg);
+    formData.append('name', values.name);
+    formData.append('dateOfBirth', values.dateOfBirth);
     try {
       await userApi.update(formData);
-      dispatch({ type: "reset" });
-      setLoading(false);
-      history.push("/profile");
+      history.push('/profile');
     } catch (error) {
-      setError("Profile edit failed, please try again.");
-      setLoading(false);
+      setError('Something went wrong, please try again.');
     }
-  };
-
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    dispatch({ type: name, value });
-  };
-
-  const saveImg = (e) => {
-    const { name, files } = e.target;
-    dispatch({ type: name, value: files[0] });
   };
 
   return (
     <div>
-      <Title>{loading ? "Loading profile data..." : "Edit your profile"}</Title>
+      <Title>{loading ? 'Loading profile data...' : 'Edit your profile'}</Title>
       {error && <StyledError>{error}</StyledError>}
-      <StyledForm onSubmit={handleSubmit}>
-        <StyledInput
-          type='text'
-          name='name'
-          value={name}
-          onChange={onChange}
-          placeholder='Name'
-        />
-        <StyledInput type='file' name='userImg' onChange={saveImg} />
-        <BlueButton type='submit'>Submit</BlueButton>
-      </StyledForm>
+      <Formik
+        initialValues={{
+          name: '',
+          userImg: null,
+          dateOfBirth: '',
+        }}
+        validationSchema={updateProfileSchema}
+        onSubmit={async (values, { setSubmitting }) => {
+          await handleSubmit(values);
+          setSubmitting(false);
+        }}
+      >
+        {({
+          isSubmitting,
+          values,
+          handleChange,
+          handleSubmit,
+          setFieldValue,
+          errors,
+          touched,
+        }) => (
+          <StyledForm onSubmit={handleSubmit}>
+            <StyledInput
+              type='text'
+              name='name'
+              value={values.name}
+              onChange={handleChange}
+              placeholder='Name'
+            />
+            {errors.name && touched.name && (
+              <StyledError>{errors.name}</StyledError>
+            )}
+            <StyledInput
+              type='date'
+              name='dateOfBirth'
+              value={values.dateOfBirth}
+              onChange={handleChange}
+            />
+            {errors.dateOfBirth && touched.dateOfBirth && (
+              <StyledError>{errors.dateOfBirth}</StyledError>
+            )}
+            <StyledInput
+              type='file'
+              name='userImg'
+              onChange={(event) => {
+                setFieldValue('userImg', event.currentTarget.files[0]);
+                setImgPreview(
+                  URL.createObjectURL(event.currentTarget.files[0])
+                );
+              }}
+            />
+            {imgPreview && <StyledImage src={imgPreview} alt='userImg' />}
+
+            <BlueButton type='submit' disabled={isSubmitting}>
+              {isSubmitting ? 'Updating...' : 'Submit'}
+            </BlueButton>
+          </StyledForm>
+        )}
+      </Formik>
     </div>
   );
 }

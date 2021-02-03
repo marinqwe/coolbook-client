@@ -11,7 +11,7 @@ import {
 } from '../styles';
 import { ConfirmPostDelete, Comments, AddComment } from '../components';
 import { getYoutubeLinks } from '../helpers/getYoutubeLinks';
-import ReactPlayer from 'react-player/youtube';
+import ReactPlayer from 'react-player';
 
 function PostPage({ match, history }) {
   const [post, setPost] = useState({
@@ -38,7 +38,7 @@ function PostPage({ match, history }) {
     console.log(ytLinks);
     //limit number of embedded videos to 3
     setVideos(ytLinks.slice(0, 3));
-    
+
     setLoading(false);
   }, [postApi, match.params.id]);
 
@@ -90,7 +90,7 @@ function PostPage({ match, history }) {
         <StyledPostTitle>{post.title}</StyledPostTitle>
         <StyledPostContent>{post.content}</StyledPostContent>
         {videos.map((video, i) => (
-          <ReactPlayer key={i} url={video} controls light />
+          <ReactPlayer key={i} url={video} controls light width='100%' />
         ))}
       </StyledPost>
       <div>

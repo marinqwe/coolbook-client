@@ -1,24 +1,50 @@
-import React from 'react';
-import { StyledNavBar, StyledNavLink, StyledIcon, StyledUser } from '../styles';
+import React, { useState } from 'react';
+import {
+  StyledNavBar,
+  StyledNavLink,
+  StyledIcon,
+  StyledUser,
+  StyledNavLeft,
+  StyledToggleMenu,
+} from '../styles';
 import { useUserCtx } from '../providers';
 
 export const AuthedNavBar = () => {
   const { user } = useUserCtx();
-
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <StyledNavBar>
-      <div>
-        <StyledNavLink exact to='/' activeClassName='yep'>
-          Home
-        </StyledNavLink>
-        <StyledNavLink to='/create-post' activeClassName='yep'>
-          New post
-        </StyledNavLink>
-      </div>
-      <StyledNavLink to='/profile' activeClassName='yep'>
+      <nav>
+        <StyledToggleMenu onClick={() => setMenuOpen(!menuOpen)}>
+          Menu
+        </StyledToggleMenu>
+        <StyledNavLeft menuOpen={menuOpen}>
+          <StyledNavLink
+            exact
+            to='/'
+            activeClassName='yep'
+            onClick={() => setMenuOpen(false)}
+          >
+            Home
+          </StyledNavLink>
+          <StyledNavLink
+            to='/create-post'
+            activeClassName='yep'
+            onClick={() => setMenuOpen(false)}
+          >
+            New post
+          </StyledNavLink>
+        </StyledNavLeft>
+      </nav>
+
+      <StyledNavLink
+        to='/profile'
+        activeClassName='yep'
+        onClick={() => setMenuOpen(false)}
+      >
         <StyledUser>
-          <StyledIcon src={user.userImg} alt='userImg' />
           <span>{user.name}</span>
+          <StyledIcon src={user.userImg} alt='userImg' />
         </StyledUser>
       </StyledNavLink>
     </StyledNavBar>

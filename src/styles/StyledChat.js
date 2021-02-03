@@ -5,8 +5,7 @@ export const StyledChat = styled.div`
   padding: 10px;
   position: fixed;
   height: 100vh;
-  width: 30%;
-  min-width: 320px;
+  width: 50%;
   top: 0;
   right: 0;
   bottom: 0;
@@ -15,38 +14,55 @@ export const StyledChat = styled.div`
   header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    @media screen and (max-width: 768px){
+      width: 100%;
+    }
     h3 {
-      margin: 0;
       align-self: center;
+      font-size: calc(8px + 2vmin);
+      @media screen and (max-width: 768px){
+        padding-left: 10px;
+      }
+
     }
     span {
       cursor: pointer;
-      font-size: calc(18px + 2vmin);
       &:hover {
         color: ${(props) => props.theme.lightblue};
+      }
+      font-size: calc(12px + 2vmin);
+      padding-right: 20px;
+      @media screen and (max-width: 768px){
+        padding-right: 30px;
       }
     }
   }
   footer {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
     font-size: calc(6px + 2vmin);
     font-weight: 900;
-    margin-bottom: 10px;
     form {
+      display: flex;
+      justify-content: center;
       width: 100%;
     }
   }
   ul {
     height: 100%;
     background-color: ${(props) => props.theme.offWhite};
-    margin: 0;
+    margin: 0 15px;
     padding: 0;
     list-style: none;
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
+  }
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    padding: 0;
   }
 `;
 
@@ -55,7 +71,7 @@ export const StyledChatJoin = styled.div`
   display: flex;
   justify-content: center;
   margin: 1rem 0;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 768px) {
     justify-content: flex-start;
   }
 `;

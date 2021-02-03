@@ -27,7 +27,7 @@ function ChatRoomList() {
         <OpenChat>Chats</OpenChat>
         {rooms.map((room) => (
           <Room key={room} onClick={() => onChatOpen(room)}>
-            {room}
+            ➡{room}
           </Room>
         ))}
       </StyledChatInfo>

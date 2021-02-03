@@ -21,6 +21,10 @@ export const StyledInput = styled.input`
   border: none;
   border-bottom: 1px solid grey;
   border-radius: 2px;
+  @media screen and (max-width: 540px){
+    min-width: 150px;
+    font-size: small;
+  }
 `;
 
 export const StyledContent = styled.textarea`

@@ -8,7 +8,13 @@ import {
   StyledChatSend,
 } from './StyledForm';
 import { StyledLink } from './StyledLink';
-import { StyledNavBar, StyledNavLink, StyledUser } from './StyledNav';
+import {
+  StyledNavBar,
+  StyledNavLink,
+  StyledUser,
+  StyledNavLeft,
+  StyledToggleMenu
+} from './StyledNav';
 import {
   BlueButton,
   DarkButton,
@@ -66,6 +72,8 @@ export {
   StyledContent,
   StyledNavBar,
   StyledNavLink,
+  StyledNavLeft,
+  StyledToggleMenu,
   StyledUser,
   StyledLink,
   StyledError,
@@ -96,5 +104,4 @@ export {
   StyledPostHeader,
   StyledNote,
   StyledPagination,
-  
 };

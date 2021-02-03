@@ -35,7 +35,6 @@ function PostPage({ match, history }) {
     setPost({ title, content, id, userId });
 
     const ytLinks = getYoutubeLinks(content);
-    console.log(ytLinks);
     //limit number of embedded videos to 3
     setVideos(ytLinks.slice(0, 3));
 

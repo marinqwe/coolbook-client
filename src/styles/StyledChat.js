@@ -1,30 +1,30 @@
 import styled from 'styled-components';
 
+export const StyledChatWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 0.5fr 2fr;
+`;
+
 export const StyledChat = styled.div`
   background-color: ${(props) => props.theme.lightgrey};
-  padding: 10px;
-  position: fixed;
-  height: 100vh;
-  width: 50%;
-  top: 0;
-  right: 0;
-  bottom: 0;
+  height: 85vh;
+  overflow: hidden;
   display: grid;
   grid-template-rows: 10% 1fr 15%;
   header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    @media screen and (max-width: 768px){
+    margin: 0 15px;
+    @media screen and (max-width: 768px) {
       width: 100%;
     }
     h3 {
       align-self: center;
       font-size: calc(8px + 2vmin);
-      @media screen and (max-width: 768px){
+      @media screen and (max-width: 768px) {
         padding-left: 10px;
       }
-
     }
     span {
       cursor: pointer;
@@ -33,10 +33,20 @@ export const StyledChat = styled.div`
       }
       font-size: calc(12px + 2vmin);
       padding-right: 20px;
-      @media screen and (max-width: 768px){
+      @media screen and (max-width: 768px) {
         padding-right: 30px;
       }
     }
+  }
+  ul {
+    height: 100%;
+    background-color: ${(props) => props.theme.offWhite};
+    margin: 0 15px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
   }
   footer {
     display: flex;
@@ -50,19 +60,22 @@ export const StyledChat = styled.div`
       width: 100%;
     }
   }
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    padding: 0;
+  }
+`;
+
+export const StyledChatUsers = styled.div`
   ul {
     height: 100%;
-    background-color: ${(props) => props.theme.offWhite};
+    background-color: ${(props) => props.theme.paperWhite};
     margin: 0 15px;
     padding: 0;
     list-style: none;
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
-  }
-  @media screen and (max-width: 768px) {
-    width: 100%;
-    padding: 0;
+    overflow-y: auto;
   }
 `;
 
@@ -80,15 +93,6 @@ export const StyledChatInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-`;
-
-export const Room = styled.span`
-  cursor: pointer;
-  margin-top: 5px;
-  font-size: calc(6px + 2vmin);
-  &:hover {
-    color: ${(props) => props.theme.lightblue};
-  }
 `;
 
 export const OpenChat = styled.div`

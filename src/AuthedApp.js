@@ -9,7 +9,7 @@ import {
   EditProfile,
 } from './pages';
 import { StyledApp } from './styles';
-import { AuthedNavBar } from './components/NavBar';
+import { Chat, AuthedNavBar } from './components';
 
 function AuthedApp() {
   return (
@@ -21,6 +21,7 @@ function AuthedApp() {
       <Route path='/post/:id/edit' component={EditPost} />
       <Route exact path='/profile' component={Profile} />
       <Route path='/profile/edit' component={EditProfile} />
+      <Route path='/chat/:room' component={Chat} />
     </StyledApp>
   );
 }

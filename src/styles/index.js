@@ -13,7 +13,7 @@ import {
   StyledNavLink,
   StyledUser,
   StyledNavLeft,
-  StyledToggleMenu
+  StyledToggleMenu,
 } from './StyledNav';
 import {
   BlueButton,
@@ -45,12 +45,13 @@ import {
 import {
   StyledChat,
   StyledChatJoin,
-  Room,
   OpenChat,
   StyledChatInfo,
   StyledMessage,
   StyledMessageHead,
   StyledMessageText,
+  StyledChatUsers,
+  StyledChatWrapper,
 } from './StyledChat';
 import { StyledHome } from './StyledHome';
 import { StyledPagination } from './StyledPagination';
@@ -60,10 +61,11 @@ export {
   StyledChat,
   StyledChatJoin,
   StyledChatInfo,
+  StyledChatUsers,
+  StyledChatWrapper,
   StyledMessage,
   StyledMessageHead,
   StyledMessageText,
-  Room,
   OpenChat,
   StyledForm,
   StyledChatSend,

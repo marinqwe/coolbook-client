@@ -1,40 +1,23 @@
-import React, { useState } from 'react';
-import Chat from './Chat';
-import { useUserCtx } from '../providers';
+import React from 'react';
 import { rooms } from '../helpers/chatRooms';
-import { StyledChatJoin, OpenChat, Room, StyledChatInfo } from '../styles';
+import {
+  StyledChatJoin,
+  OpenChat,
+  StyledChatInfo,
+  StyledLink,
+} from '../styles';
 
 function ChatRoomList() {
-  const { setMessages, onRoomLeave, onRoomJoin } = useUserCtx();
-  const [chatOpen, setChatOpen] = useState(false);
-  const [chatRoom, setChatRoom] = useState('');
-
-  const onChatExit = () => {
-    onRoomLeave();
-    setMessages([]);
-    setChatOpen(false);
-  };
-
-  const onChatOpen = (room) => {
-    onRoomJoin(room);
-    setChatRoom(room);
-    setChatOpen(true);
-  };
-
   return (
     <StyledChatJoin>
       <StyledChatInfo>
         <OpenChat>Chats</OpenChat>
         {rooms.map((room) => (
-          <Room key={room} onClick={() => onChatOpen(room)}>
+          <StyledLink to={`/chat/${room}`} key={room}>
             ➡{room}
-          </Room>
+          </StyledLink>
         ))}
       </StyledChatInfo>
-
-      {chatOpen && (
-        <Chat chatOpen={chatOpen} onChatExit={onChatExit} chatRoom={chatRoom} />
-      )}
     </StyledChatJoin>
   );
 }

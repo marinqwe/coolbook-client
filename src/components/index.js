@@ -8,6 +8,7 @@ import UserVote from './UserVote';
 import ChatJoin from './ChatJoin';
 import Chat from './Chat';
 import PostPagination from './PostPagination';
+import { AuthedNavBar } from './NavBar';
 
 export {
   AddComment,
@@ -20,4 +21,5 @@ export {
   Chat,
   ChatJoin,
   PostPagination,
+  AuthedNavBar,
 };

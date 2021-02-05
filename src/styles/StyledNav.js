@@ -54,6 +54,6 @@ export const StyledUser = styled.div`
   span {
     display: flex;
     align-self: center;
-    padding: 0 5px;
+    padding-right: 5px;
   }
 `;

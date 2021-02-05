@@ -4,6 +4,7 @@ import socketIOClient from 'socket.io-client';
 
 export function useChat(user) {
   const [messages, setMessages] = useState([]);
+  const [roomUsers, setRoomUsers] = useState([]);
   //const [usersOnline, setUsersOnline] = useState(new Map());
   const socketRef = useRef(null);
 
@@ -16,6 +17,10 @@ export function useChat(user) {
       //listen for other users' messages
       socketRef.current.on('newMessage', (message) => {
         setMessages((messages) => [...messages, message]);
+      });
+
+      socketRef.current.on('roomUsers', ({ users }) => {
+        setRoomUsers([...users]);
       });
 
       //listen for private messages
@@ -68,5 +73,6 @@ export function useChat(user) {
     setMessages,
     onRoomJoin,
     onRoomLeave,
+    roomUsers,
   };
 }

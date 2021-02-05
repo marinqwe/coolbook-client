@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useApiCtx, usePaginationCtx } from '../providers';
-import { Posts, ChatJoin, PostPagination } from '../components';
+import { Posts, ChatRoomList, PostPagination } from '../components';
 import { Title, StyledHome } from '../styles';
 
 export const AuthedHome = ({ history }) => {
@@ -45,7 +45,7 @@ export const AuthedHome = ({ history }) => {
           <p>It's empty in here. Click "New Post" to fill the void.</p>
         )}
       </div>
-      <ChatJoin />
+      <ChatRoomList />
     </StyledHome>
   );
 };

@@ -5,8 +5,7 @@ import FullPageLoader from './FullPageLoader';
 import PostForm from './PostForm';
 import Posts from './Posts';
 import UserVote from './UserVote';
-import ChatJoin from './ChatJoin';
-import Chat from './Chat';
+import ChatRoomList from './ChatRoomList';
 import PostPagination from './PostPagination';
 import { AuthedNavBar } from './NavBar';
 
@@ -18,8 +17,7 @@ export {
   PostForm,
   Posts,
   UserVote,
-  Chat,
-  ChatJoin,
+  ChatRoomList,
   PostPagination,
   AuthedNavBar,
 };

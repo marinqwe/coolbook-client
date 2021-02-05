@@ -1,56 +1,46 @@
-import React, { useState, useReducer,  useEffect } from 'react';
-import { StyledError, Title } from '../styles';
+import React, { useState, useEffect } from 'react';
+import { Formik } from 'formik';
+import {
+  Title,
+  StyledInput,
+  StyledForm,
+  BlueButton,
+  StyledContent,
+  StyledError,
+} from '../styles';
 import { useApiCtx } from '../providers';
-import { PostForm } from '../components';
-
-const initialFormState = {
-  title: '',
-  content: '',
-};
-
-function reducer(state, action) {
-  if (action.type === 'reset') {
-    return initialFormState;
-  }
-  if (!action.type) {
-    return { ...state, ...action };
-  }
-  const result = { ...state };
-  result[action.type] = action.value;
-  return result;
-}
+import { createPostSchema } from '../helpers/validationSchema';
 
 function EditPost({ match, history }) {
   const { postApi } = useApiCtx();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [state, dispatch] = useReducer(reducer, initialFormState);
-  const { title, content } = state;
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
 
   useEffect(() => {
-    setLoading(true);
     const fetchPost = async () => {
+      setLoading(true);
       const {
         data: { title, content },
       } = await postApi.get(match.params.id);
-      dispatch({ title, content });
+      setTitle(title);
+      setContent(content);
       setLoading(false);
     };
     fetchPost();
   }, [match.params.id, postApi]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (values) => {
     setError(null);
     setLoading(true);
     try {
       const {
         data: { id },
       } = await postApi.edit({
-        post: state,
+        post: { title: values.title, content: values.content },
         id: match.params.id,
       });
-      dispatch({ type: 'reset' });
       setLoading(false);
       history.push(`/post/${id}`);
     } catch (error) {
@@ -58,20 +48,58 @@ function EditPost({ match, history }) {
       setLoading(false);
     }
   };
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    dispatch({ type: name, value });
-  };
   return (
     <div>
       <Title>{loading ? 'Loading post...' : 'Edit post'}</Title>
       {error && <StyledError>{error}</StyledError>}
-      <PostForm
-        handleSubmit={handleSubmit}
-        onChange={onChange}
-        content={content}
-        title={title}
-      />
+      <Formik
+        initialValues={{
+          title: title,
+          content: content,
+        }}
+        enableReinitialize
+        validationSchema={createPostSchema}
+        onSubmit={async (values, { setSubmitting }) => {
+          await handleSubmit(values);
+          setSubmitting(false);
+          history.push(`/post/${match.params.id}`);
+        }}
+      >
+        {({
+          isSubmitting,
+          values,
+          handleChange,
+          handleSubmit,
+          errors,
+          touched,
+        }) => (
+          <StyledForm onSubmit={handleSubmit}>
+            <StyledInput
+              type='text'
+              name='title'
+              value={values.title}
+              onChange={handleChange}
+              placeholder='Title'
+            />
+            {errors.title && touched.title && (
+              <StyledError>{errors.title}</StyledError>
+            )}
+            <StyledContent
+              type='textarea'
+              name='content'
+              value={values.content}
+              onChange={handleChange}
+              placeholder='Content of your post'
+            />
+            {errors.content && touched.content && (
+              <StyledError>{errors.content}</StyledError>
+            )}
+            <BlueButton type='submit' disabled={isSubmitting}>
+              Submit
+            </BlueButton>
+          </StyledForm>
+        )}
+      </Formik>
     </div>
   );
 }

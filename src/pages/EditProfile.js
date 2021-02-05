@@ -12,12 +12,11 @@ import { Formik } from 'formik';
 import { updateProfileSchema } from '../helpers/validationSchema';
 
 function EditProfile({ history }) {
-  const { userApi } = useUserCtx();
+  const { userApi, user } = useUserCtx();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const [imgPreview, setImgPreview] = useState('');
-
   const handleSubmit = async (values) => {
     let formData = new FormData();
 
@@ -38,9 +37,9 @@ function EditProfile({ history }) {
       {error && <StyledError>{error}</StyledError>}
       <Formik
         initialValues={{
-          name: '',
-          userImg: null,
-          dateOfBirth: '',
+          name: user.name,
+          userImg: user.userImg,
+          dateOfBirth: user.dateOfBirth,
         }}
         validationSchema={updateProfileSchema}
         onSubmit={async (values, { setSubmitting }) => {

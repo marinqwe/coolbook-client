@@ -6,6 +6,7 @@ import CreatePost from './CreatePost';
 import EditPost from './EditPost';
 import PostPage from './PostPage';
 import EditProfile from './EditProfile';
+import Chat from './Chat';
 
 export {
   AuthedHome,
@@ -17,4 +18,5 @@ export {
   PostPage,
   EditPost,
   EditProfile,
+  Chat,
 };

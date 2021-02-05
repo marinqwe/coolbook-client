@@ -67,6 +67,10 @@ export const StyledChat = styled.div`
 `;
 
 export const StyledChatUsers = styled.div`
+  h3 {
+    font-size: calc(10px + 2vmin);
+    margin: 0 0 5px 15px;
+  }
   ul {
     height: 100%;
     background-color: ${(props) => props.theme.paperWhite};
@@ -76,6 +80,14 @@ export const StyledChatUsers = styled.div`
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    li {
+      font-size: calc(10px + 1vmin);
+      color: ${(props) => props.theme.grey};
+      cursor: pointer;
+      &:hover {
+        color: ${(props) => props.theme.blue};
+      }
+    }
   }
 `;
 

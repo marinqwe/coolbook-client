@@ -30,12 +30,12 @@ function Chat({
   } = useUserCtx();
 
   const inputRef = useRef(null);
-
   useEffect(() => {
     onRoomJoin(room);
     return () => {
       onRoomLeave();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [room]);
 
   const setRef = useCallback((node) => {
@@ -56,6 +56,7 @@ function Chat({
   return (
     <StyledChatWrapper>
       <StyledChatUsers>
+        <h3>Users</h3>
         <ul>
           {roomUsers.map((roomUser, i) => {
             return <li key={i}>{roomUser.user}</li>;
@@ -65,7 +66,6 @@ function Chat({
       <StyledChat>
         <header>
           <h3>Chat about {room}</h3>
-          {/* <span onClick={() => onChatExit()}>&times;</span> */}
         </header>
 
         <ul>

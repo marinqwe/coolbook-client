@@ -55,17 +55,9 @@ function Chat({
 
   return (
     <StyledChatWrapper>
-      <StyledChatUsers>
-        <h3>Users</h3>
-        <ul>
-          {roomUsers.map((roomUser, i) => {
-            return <li key={i}>{roomUser.user}</li>;
-          })}
-        </ul>
-      </StyledChatUsers>
       <StyledChat>
         <header>
-          <h3>Chat about {room}</h3>
+          <h3>{room} chat</h3>
         </header>
 
         <ul>
@@ -134,6 +126,21 @@ function Chat({
           </Formik>
         </footer>
       </StyledChat>
+      <StyledChatUsers>
+        <span>Users in chat:</span>
+        <ul>
+          {roomUsers.map((roomUser, i) => {
+            return (
+              <li key={i}>
+                <pre>
+                  {roomUser.user}
+                  {roomUsers.length === i + 1 ? '.' : ', '}
+                </pre>
+              </li>
+            );
+          })}
+        </ul>
+      </StyledChatUsers>
     </StyledChatWrapper>
   );
 }

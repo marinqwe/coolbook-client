@@ -2,7 +2,11 @@ import styled from 'styled-components';
 
 export const StyledChatWrapper = styled.div`
   display: grid;
-  grid-template-columns: 0.5fr 2fr;
+  grid-template-columns: 2fr 0.5fr;
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 0.1fr;
+  }
 `;
 
 export const StyledChat = styled.div`
@@ -24,17 +28,6 @@ export const StyledChat = styled.div`
       font-size: calc(8px + 2vmin);
       @media screen and (max-width: 768px) {
         padding-left: 10px;
-      }
-    }
-    span {
-      cursor: pointer;
-      &:hover {
-        color: ${(props) => props.theme.lightblue};
-      }
-      font-size: calc(12px + 2vmin);
-      padding-right: 20px;
-      @media screen and (max-width: 768px) {
-        padding-right: 30px;
       }
     }
   }
@@ -67,26 +60,26 @@ export const StyledChat = styled.div`
 `;
 
 export const StyledChatUsers = styled.div`
-  h3 {
-    font-size: calc(10px + 2vmin);
-    margin: 0 0 5px 15px;
+  margin 10px 0;
+  span {
+    font-size: calc(10px + 1vmin);
+    margin-left: 15px;
   }
   ul {
     height: 100%;
     background-color: ${(props) => props.theme.paperWhite};
-    margin: 0 15px;
+    margin-left: 15px;
     padding: 0;
     list-style: none;
     display: flex;
-    flex-direction: column;
-    overflow-y: auto;
+    flex-wrap: wrap;
+    margin: 0 15px;
     li {
-      font-size: calc(10px + 1vmin);
+      padding: 0;
+      font-size: calc(4px + 1vmin);
       color: ${(props) => props.theme.grey};
       cursor: pointer;
-      &:hover {
-        color: ${(props) => props.theme.blue};
-      }
+      
     }
   }
 `;

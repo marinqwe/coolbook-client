@@ -44,7 +44,7 @@ export const AuthedNavBar = () => {
       >
         <StyledUser>
           <span>{user.name}</span>
-          <StyledIcon src={user.userImg} alt='img' />
+          <StyledIcon src={`/${user.userImg}`} alt='img' />
         </StyledUser>
       </StyledNavLink>
     </StyledNavBar>

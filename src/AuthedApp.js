@@ -16,13 +16,13 @@ function AuthedApp() {
   return (
     <StyledApp>
       <AuthedNavBar />
-      <Route path='/' component={AuthedHome} exact />
-      <Route path='/create-post' component={CreatePost} />
-      <Route path='/post/:id' component={PostPage} exact />
-      <Route path='/post/:id/edit' component={EditPost} />
-      <Route path='/profile' component={Profile} exact />
-      <Route path='/profile/edit' component={EditProfile} />
-      <Route path='/chat/:room' component={Chat} />
+        <Route path='/' component={AuthedHome} exact />
+        <Route path='/create-post' component={CreatePost} />
+        <Route path='/post/:id' component={PostPage} exact />
+        <Route path='/post/:id/edit' component={EditPost} />
+        <Route path='/profile' component={Profile} exact />
+        <Route path='/profile/edit' component={EditProfile} />
+        <Route path='/chat/:room' component={Chat} />
     </StyledApp>
   );
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { UserApi } from '../api';
 import { useChat } from './useChat';
 
-const userApiUrl = '/api/user';
+const userApiUrl = `/api/user`;
 const userApi = new UserApi(userApiUrl);
 
 export function useUser() {
